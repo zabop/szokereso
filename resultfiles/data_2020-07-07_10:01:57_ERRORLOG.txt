@@ -1,0 +1,5 @@
+<class 'KeyboardInterrupt'>
+
+/mnt/volume/anagy/mediascraper/mediaScraper/output/data_2020-07-07_10:01:57.csv
+person_data
+0

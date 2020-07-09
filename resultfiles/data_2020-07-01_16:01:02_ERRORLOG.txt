@@ -1,0 +1,5 @@
+<class 'IndexError'>
+list index out of range
+/mnt/volume/anagy/mediascraper/mediaScraper/output/data_2020-07-01_16:01:02.csv
+stanza
+1461
