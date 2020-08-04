@@ -82,8 +82,8 @@ def didMoreThanThisManySecondsElapsedSinceEndOfThatWeek(singleDate,seconds):
 # In[8]:
 
 
-freqFilesPath = '/mnt/volume/jupyter/szokereso/cron/szokeresores/weeklyfreqs/'
-momFilesPathAndWildCard  = '/mnt/volume/jupyter/szokereso/cron/szokeresores/momentumraszurt/live_updated3_dict_onlymomentum_data_*_dfUnifiedNanFilteredOnlySomeColsUpdated3.csv'
+freqFilesPath = '/mnt/volume/jupyter/szokereso/cron2/szokeresores/weeklyfreqs/'
+momFilesPathAndWildCard  = '/mnt/volume/jupyter/szokereso/cron2/szokeresores/momentumraszurt/live_updated3_dict_onlymomentum_data_*_dfUnifiedNanFilteredOnlySomeColsUpdated3.csv'
 
 
 # In[22]:

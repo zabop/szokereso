@@ -262,7 +262,7 @@ debugmode = False
 wildcard = '/mnt/volume/anagy/mediascraper/mediaScraper/output/data*csv'
 
 todofiles=get_files_sorted_by_date_after_a_date('/mnt/volume/anagy/mediascraper/mediaScraper/output/data*csv',
-                                               [2020,7,14,0])
+                                               [2020,7,16,0])
 while len(todofiles) != 0:
     print('processing: '+todofiles[0])    
     
