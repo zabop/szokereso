@@ -23,6 +23,17 @@ def validalias(alias):
 # In[3]:
 
 
+def filetime(file):
+    year=file.split('/')[-1][5:9]
+    month=file.split('/')[-1][10:12]
+    day=file.split('/')[-1][13:15]
+    hour=file.split('/')[-1][16:18]
+    return [int(each) for each in [year, month, day, hour]]
+
+
+# In[4]:
+
+
 def matchfinder(text,searchforthese):
     matches=[alias
              for persondata_searchtarget in searchforthese
@@ -31,7 +42,7 @@ def matchfinder(text,searchforthese):
     return matches
 
 
-# In[4]:
+# In[5]:
 
 
 class dictionary_class:
@@ -42,7 +53,7 @@ class dictionary_class:
         self.geo = geo
 
 
-# In[5]:
+# In[6]:
 
 
 def searchlist_maker(csv,excelfile=False,multisheet=False,columnsfiltered=False, headerwechoose='name_list',**kwargs):
@@ -82,7 +93,7 @@ def searchlist_maker(csv,excelfile=False,multisheet=False,columnsfiltered=False,
     return persondata_searchlist
 
 
-# In[6]:
+# In[7]:
 
 
 dictionaries=[
@@ -120,7 +131,7 @@ dictionary_class('corporate2dict',
                              alias_separator='|'))]
 
 
-# In[7]:
+# In[8]:
 
 
 def get_files_sorted_by_date_after_a_date(look_for_this_pattern, cutoffdate):
@@ -134,7 +145,7 @@ def get_files_sorted_by_date_after_a_date(look_for_this_pattern, cutoffdate):
     return sorted_filtered_csvs
 
 
-# In[ ]:
+# In[10]:
 
 
 debugmode = False
@@ -153,25 +164,22 @@ while True:
     cells = list(targetdf['TEXT'])
     
     for idictionary, dictionary in enumerate(dictionaries):
-        print(dictionary)
-        for icell, cell in enumerate(list(targetdf['TEXT'])):
-            if icell%100 == 0: print(icell)
-            if icell > 3700: #remove when eleseben megy
-                print(icell)
-                if type(cell) is not float and not len(matchfinder(cell,dictionary.searchlist)) > dictionary.maxcolnum            and len(matchfinder(cell,dictionary.searchlist))>0:
-                    for i, e in enumerate(matchfinder(cell,dictionary.searchlist)):
-                        targetdf.loc[icell,dictionary.name+str(i)]=e  
+        #if idictionary==1: #remove when elesben megy
+        if True:
+            print(dictionary)
+            for icell, cell in enumerate(list(targetdf['TEXT'])):
+                if icell%100 == 0: print(icell)
+                #if icell > 3700: #remove when eleseben megy
+                if True:
+                    #print(icell)
+                    if type(cell) is not float and not len(matchfinder(cell,dictionary.searchlist)) > dictionary.maxcolnum            and len(matchfinder(cell,dictionary.searchlist))>0:
+                        for i, e in enumerate(matchfinder(cell,dictionary.searchlist)):
+                            targetdf.loc[icell,dictionary.name+str(i)]=e  
     
     targetdf.to_csv('resultfiles/nagyszokereso_'+targetcsv.split('/')[-1])
     
     todofiles=get_files_sorted_by_date_after_a_date('/mnt/volume/anagy/mediascraper/mediaScraper/output/data*csv',
-                filetime(todofiles[0])[:3]+[filetime(todofiles[0])[-1]+1]) # hour increased by 1
-
-
-# In[ ]:
-
-
-
+                filetime(todoFiles[0])[:3]+[filetime(todoFiles[0])[-1]+1]) # hour increased by 1
 
 
 # In[ ]:

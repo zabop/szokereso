@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[3]:
 
 
 import glob
@@ -12,34 +12,13 @@ import pathlib
 import re
 
 
-# In[2]:
-
-
-def validalias(alias):
-    if len(str(alias).strip()) > 5 and len(str(alias).strip().split(' ')) > 1: return True
-    else: return False
-
-
-# In[3]:
-
-
-def matchfinder(text,searchforthese):
-    matches=[alias
-             for persondata_searchtarget in searchforthese
-             for alias in persondata_searchtarget
-             if validalias(alias) and alias.lower() in str(text).lower()]
-    return matches
-
-
 # In[4]:
 
 
-class dictionary_class:
-    def __init__(self, name, maxcolnum, searchlist=None, geo=False):
-        self.name = name
-        self.maxcolnum = maxcolnum
-        self.searchlist = searchlist
-        self.geo = geo
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '/mnt/volume/jupyter/szokereso/negyedikfeladatUjraHet')
+import szokereso_functions as sf
 
 
 # In[5]:
@@ -86,33 +65,33 @@ def searchlist_maker(csv,excelfile=False,multisheet=False,columnsfiltered=False,
 
 
 dictionaries=[
-dictionary_class('person_data',
+sf.dictionary_class('person_data',
            10,
            searchlist_maker('/mnt/volume/jupyter/szokereso/person_data-1592394309231_utf8.csv',alias_separator='|')),
-dictionary_class('wikilist',
+sf.dictionary_class('wikilist',
            5,
            searchlist_maker('/mnt/volume/jupyter/szokereso/A_negyedik_Orbán-kormany_allamtitkarainak_listaja.csv')),
 #dictionary_class('stanza',
 #           10),
-dictionary_class('settlement_list',
+sf.dictionary_class('settlement_list',
            5,
            searchlist_maker('/mnt/volume/jupyter/szokereso/List of Settlements_m2.xlsx', excelfile=True,headerwechoose='settlement_name'),
            geo=True),
-dictionary_class('szotar_2.1',
+sf.dictionary_class('szotar_2.1',
            10,
            searchlist_maker('/mnt/volume/jupyter/szokereso/szotar_2.1.xlsx',multisheet=True)),
-dictionary_class('instit_dict',
+sf.dictionary_class('instit_dict',
             10,
             searchlist_maker('/mnt/volume/jupyter/szokereso/instit_dict_2.1_updated_headers.xlsx',
                              multisheet=True,
                              columnsfiltered=True)),
-dictionary_class('geo2dict',
+sf.dictionary_class('geo2dict',
                 10,
                 searchlist_maker('/mnt/volume/jupyter/szokereso/geo2.csv',
                              multisheet=False,
                              columnsfiltered=False,
                              alias_separator='|')),
-dictionary_class('corporate2dict',
+sf.dictionary_class('corporate2dict',
                  10,
                  searchlist_maker('/mnt/volume/jupyter/szokereso/corporate2.csv',
                              multisheet=False,
@@ -123,49 +102,43 @@ dictionary_class('corporate2dict',
 # In[7]:
 
 
-def get_files_sorted_by_date_after_a_date(look_for_this_pattern, cutoffdate):
-    csvs = glob.glob(look_for_this_pattern)
-    datetimes=[datetime.datetime(*[int(num) for num in re.findall(r'\d+', each)[:4]]) for each in csvs]
-    dt_csvs_filtered=[[dt, csv] for dt, csv in zip(datetimes,csvs) if dt >= datetime.datetime(*cutoffdate)]
-    sorted_filtered_csvs = [csv
-                        for _, csv in sorted(
-                                         zip([eachpair[0] for eachpair in dt_csvs_filtered],
-                                             [eachpair[1] for eachpair in dt_csvs_filtered]))]
-    return sorted_filtered_csvs
-
-
-# In[ ]:
-
-
-debugmode = False
 inputPathAndWildcard = '/mnt/volume/anagy/mediascraper/mediaScraper/output/data*csv'
-todoFiles=get_files_sorted_by_date_after_a_date(inputPathAndWildcard,[2020,7,1,0])
+debugmode=False
+
+# In[9]:
+
 while True:
-    targetcsv=todoFiles[0]
-    
-    targetdf = pd.read_csv(targetcsv)
-    
-    num_of_columns_for_each_dict={dictionary.name: dictionary.maxcolnum for dictionary in dictionaries}
-    for each in num_of_columns_for_each_dict:
-        for index in range(num_of_columns_for_each_dict[each]):
-            targetdf[each + str(index)]=''
-   
-    cells = list(targetdf['TEXT'])
-    
-    for idictionary, dictionary in enumerate(dictionaries):
-        print(dictionary)
-        for icell, cell in enumerate(list(targetdf['TEXT'])):
-            if icell%100 == 0: print(icell)
-            if icell > 3700: #remove when eleseben megy
-                print(icell)
-                if type(cell) is not float and not len(matchfinder(cell,dictionary.searchlist)) > dictionary.maxcolnum            and len(matchfinder(cell,dictionary.searchlist))>0:
-                    for i, e in enumerate(matchfinder(cell,dictionary.searchlist)):
+    while True:
+        todoFiles=sf.get_files_sorted_by_date_after_a_date(inputPathAndWildcard,[2020,7,15,0])
+        szokeresoResFilesPathAndWildcard='/mnt/volume/jupyter/szokereso/ujfajlnezo7/resultfiles/nagyszokereso_data_*'
+        todoFilesWithoutOutput = sf.getTodoFilesWithoutOutput(
+                                    todoFiles=todoFiles,
+                                    outputFiles=sf.getOutputFiles(szokeresoResFilesPathAndWildcard))
+        if len(todoFilesWithoutOutput) == 0: break
+        
+        targetcsv = todoFilesWithoutOutput[0]
+        targetdf = pd.read_csv(targetcsv)
+        print(targetcsv)
+
+        num_of_columns_for_each_dict={dictionary.name: dictionary.maxcolnum for dictionary in dictionaries}
+        for each in num_of_columns_for_each_dict:
+            for index in range(num_of_columns_for_each_dict[each]):
+                #See: https://stackoverflow.com/a/29517089/8565438
+                targetdf[each + str(index)]=''
+                
+        for idictionary, dictionary in enumerate(dictionaries):
+            print(dictionary.name)
+            print(idictionary)
+            for icell, cell in enumerate(list(targetdf['TEXT'])):
+                if icell%1000 == 0: print(icell)
+                sf_matchfinder=sf.matchfinder(cell,dictionary.searchlist, strictfiltering=True)
+                if type(cell) is not float and not len(sf_matchfinder) > dictionary.maxcolnum and len(sf_matchfinder)>0:
+                    for i, e in enumerate(sf_matchfinder):
                         targetdf.loc[icell,dictionary.name+str(i)]=e  
-    
-    targetdf.to_csv('resultfiles/nagyszokereso_'+targetcsv.split('/')[-1])
-    
-    todofiles=get_files_sorted_by_date_after_a_date('/mnt/volume/anagy/mediascraper/mediaScraper/output/data*csv',
-                filetime(todofiles[0])[:3]+[filetime(todofiles[0])[-1]+1]) # hour increased by 1
+           
+        if not debugmode: targetdf.to_csv('resultfiles/nagyszokereso_'+targetcsv.split('/')[-1])
+            
+    sf.doThisWhenNoFileIsFoundToProcess(5*60)
 
 
 # In[ ]:
