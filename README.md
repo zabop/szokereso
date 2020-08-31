@@ -58,7 +58,7 @@ Ez használja ezt:
 
     /mnt/volume/jupyter/szokereso/ujfajlnezoNyolc/szokereso_functions.py
 
-Ez a fálj (és a többi `szokereso_functions.py`) heavily kommentelt, szerintem elég jól le lett írva, melyik függvény mit csinál. A `core` scriptek kommenteltsége nem jó, de gyakran kódból is egyértelmű szerintem, hogy mi történik (főleg, ha értjük hogy melyik függvény mit csinál, ahhoz ott van a kommentelt `szokereso_functions.py`.
+Ez a fálj (és a többi `szokereso_functions.py`) heavily kommentelt, szerintem elég jól le lett írva, melyik függvény mit csinál. A `core` scriptek kommenteltsége nem jó, de gyakran kódból is egyértelmű szerintem, hogy mi történik (főleg, ha értjük hogy melyik függvény mit csinál, ahhoz ott van a kommentelt `szokereso_functions.py`).
 
 **Fejlődési lehetőség**: lehetne egyesíteni ezt a `szokereso_functions.py`-t a fentebb említett `/mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/`-ban lévő `szokereso_functions.py`-jal. Ez a kettő nagyon hasonló.
 
