@@ -25,8 +25,6 @@ Ez az, hogy megszámoljuk, egy nap alatt melyik entitás hányszor jelent meg. E
 
     /mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/extended_dailyaggreg_outputsTwo.py
     
-Később 
-
 **Fejlődési lehetőség**: meg lehetne csinálni, hogy ez is szinten a `szokereso_functions.py`-ból hívja be a függvényeket, erre már nem volt időm.
 
 ### Adatok heti aggregála
