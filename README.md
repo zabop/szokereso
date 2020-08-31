@@ -21,9 +21,11 @@ Sok függvényt használ ebből a fájlból:
 
 ### Adatok napi aggregálása
 
-Ez az, hogy megszámoljuk, egy nap alatt melyik entitás hányszor jelent meg. Ennek legfejlettebb verziója:
+Ez az, hogy megszámoljuk, egy nap alatt melyik entitás hányszor jelent meg. Ennek legfejlettebb verziója, amire épül a heti aggregáló:
 
-    /mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/dailyAggregPlotsImproved_dbcompatible.py
+    /mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/extended_dailyaggreg_outputsTwo.py
+    
+Később 
 
 **Fejlődési lehetőség**: meg lehetne csinálni, hogy ez is szinten a `szokereso_functions.py`-ból hívja be a függvényeket, erre már nem volt időm.
 
@@ -63,5 +65,17 @@ Ez a fálj (és a többi `szokereso_functions.py`) heavily kommentelt, szerintem
 **Fejlődési lehetőség**: lehetne egyesíteni ezt a `szokereso_functions.py`-t a fentebb említett `/mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/`-ban lévő `szokereso_functions.py`-jal. Ez a kettő nagyon hasonló.
 
 ---
+
+Figyeljünk, hogy ne nevezzünk el fájlokat úgy, hogy azokban számok megjelennek, kivéve a dátum. Ha egyéb számok is vannak, az összezavarhatja az olyan függvényeket, amelyek a fájl nevéből következteti ki, mikori a fájl. (Tehát pl ne legyen olyan path egy fájlhoz hogy `/mappam/kliens2/futas4/fajl.valami`. A napi heti aggregáló annyira kis számításigényű, hogy mikor újraindítjuk, újrakezdi csinálni őket Július 1 -től (vagy amennyi bele van íva). A heti talán minden héten legyártja a pár ábrát. Mivel ez csak pár perc futás, nem láttam értelmét ezen javítani. Ha kérdésünk van, Stackoverflow a barátunk, különösen, ha jól feltett kérdésünk van. Ha kevésbé jól megfogalmazott, akkor https://chat.stackoverflow.com/rooms/6/python -t tudom ajánlani. Munkaügyben feltett kérdés / bounty-k az elmúlt időszakból:
+
+https://stackoverflow.com/questions/63598670/cooccurence-matrix-from-pandas-dataframe
+https://stackoverflow.com/questions/63594550/apply-to-every-column-of-every-dataframe-of-an-excelfile-pandas
+https://stackoverflow.com/questions/63583502/removing-duplicates-from-pandas-rows
+https://stackoverflow.com/questions/63548321/pandas-dataframe-rows-to-dict-of-lists-using-first-value-of-each-row-as-key
+https://stackoverflow.com/questions/63526631/create-as-many-columns-as-necessary-use-them-to-place-output-of-apply-in-a
+https://stackoverflow.com/questions/63247382/how-to-count-the-number-of-rows-containing-both-a-value-in-a-set-of-columns-and
+https://stackoverflow.com/questions/63237043/how-to-get-columns-containing-names-of-pre-defined-equivalence-classes-of-values
+https://stackoverflow.com/questions/62943622/how-to-improve-accuracy-of-model-for-categorical-non-binary-foreign-language-s
+https://stackoverflow.com/questions/60816403/get-week-number-with-week-start-day-different-than-monday-python
 
 
