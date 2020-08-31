@@ -7,7 +7,7 @@ Minden "kliens" egy worksheet a szótárban. Minden kliens számára az adott wo
 Az egy worksheeten belül, egy sorban található kifejezések egyenértékűek, ezeket hívom ekvivalencia-oszályoknak.
 Bármelyik elemét megtaláljuk egy ekvivalencia-osztálynak egy szövegen belül, az ekvivalencia-osztály nevét mentjük el, ami az első elem a sorban.
 
-Kétórénként vannak bejövő fájlok. (Path bele van írva a scriptbe, nem kell vele törődni). Ezek nagyrésze olyan sorokat tartalmaz, amik már egy korábbi fájlban szerepeltek.
+Kétórénként vannak bejövő fájlok. (Path bele van írva a scriptbe). Ezek nagyrésze olyan sorokat tartalmaz, amik már egy korábbi fájlban szerepeltek.
 
 Először tehát az inputok duplikált-szűrése történik. A szűrt outputra eresszük rá az alább részletezett `szokereso_core.py`-t.
 
