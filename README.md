@@ -19,7 +19,7 @@ Ennek legfejlettebb verziója itt található:
 Sok függvényt használ ebből a fájlból:
 `/mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/szokereso_functions.py`
 
-### Adatok napi aggregálása
+- Adatok napi aggregálása
 
 Ez az, hogy megszámoljuk, egy nap alatt melyik entitás hányszor jelent meg. Ennek legfejlettebb verziója:
 
@@ -27,7 +27,7 @@ Ez az, hogy megszámoljuk, egy nap alatt melyik entitás hányszor jelent meg. E
 
 **Fejlődési lehetőség**: meg lehetne csinálni, hogy ez is szinten a `szokereso_functions.py`-ból hívja be a függvényeket, erre már nem volt időm.
 
-### Adatok heti aggregála
+- Adatok heti aggregála
 
 Egy adott héten hányszor jelenik meg egy entitás. A napi aggregálóra épül (így ha az elhasal ez is, de egyszerűbb sokkal a kód).
 Legfejlettebb verzió:
@@ -38,7 +38,7 @@ Ha egy új direcory-ban indítjuk el, figyeljünk, hogy a napi aggregálás outp
 
 **Fejlődési lehetőség**: ha `szokereso_functions.py`-ból hívná be a függvényeket, jobb lenne.
 
-### Cooccurence mátrix
+- Cooccurence mátrix
 
 Nem automatikus az outputgyártás. Eddigi legfejlettebb verzió:
 
