@@ -19,7 +19,7 @@ Ennek legfejlettebb verziója itt található:
 Sok függvényt használ ebből a fájlból:
 `/mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/szokereso_functions.py`
 
-- Adatok napi aggregálása
+### Adatok napi aggregálása
 
 Ez az, hogy megszámoljuk, egy nap alatt melyik entitás hányszor jelent meg. Ennek legfejlettebb verziója:
 
@@ -27,7 +27,7 @@ Ez az, hogy megszámoljuk, egy nap alatt melyik entitás hányszor jelent meg. E
 
 **Fejlődési lehetőség**: meg lehetne csinálni, hogy ez is szinten a `szokereso_functions.py`-ból hívja be a függvényeket, erre már nem volt időm.
 
-- Adatok heti aggregála
+### Adatok heti aggregála
 
 Egy adott héten hányszor jelenik meg egy entitás. A napi aggregálóra épül (így ha az elhasal ez is, de egyszerűbb sokkal a kód).
 Legfejlettebb verzió:
@@ -38,11 +38,25 @@ Ha egy új direcory-ban indítjuk el, figyeljünk, hogy a napi aggregálás outp
 
 **Fejlődési lehetőség**: ha `szokereso_functions.py`-ból hívná be a függvényeket, jobb lenne.
 
-- Cooccurence mátrix
+### Cooccurence mátrix
 
 Nem automatikus az outputgyártás. Eddigi legfejlettebb verzió:
 
     /mnt/volume/jupyter/szokereso/ujfajlnezoHet/Cooc.ipynb
 
-
 ---
+
+## Sokszótáras szókereső
+
+Ez a kód nagyban hasonlít a kliens-specifikus szókeresésre. Most több szótárat használunk, de az eredményt nem bontjuk kliensekre. Futási időn nagyban gyorsít (egy-két nagyságrendet kb), hogy szűrünk duplikáltakra. Nagyot lassít az, hogy ekvivalencia-osztályokat használunk ('MSZP', 'Magyar Szocialista Párt', 'Szocik' - bármelyiket találjuk, mindig csak az ekvivalencia-osztály nevét, vagyis ebben a példában: MSZP jegyezzük fel az output csv-be). Valószínűleg lehet javítani sokat az algoritmuson, amivel csinálom. (Először minden névre külön keres, utána cseréljük le a neveket annak az ekvivalencia-osztálynak a nevére ahova tartoznak: ez valószínűleg nem túl computing power optimális, de egyszerű volt megírni & szerintem karbantartani. 
+
+Eddigi legjelettebb verzió:
+
+    /mnt/volume/jupyter/szokereso/ujfajlnezoNyolc/nagyszokereso_duplikalt_szuressel_ekvivalenciaosztalyokkal.py
+    
+Ez használja ezt:
+
+    /mnt/volume/jupyter/szokereso/ujfajlnezoNyolc/szokereso_functions.py
+    
+**Fejlődési lehetőség**: lehetne egyesíteni ezt a `szokereso_functions.py`-t a fentebb említett `/mnt/volume/jupyter/szokereso/negyedikfeladatUjraNyolc/`-ban lévő `szokereso_functions.py`-jal. Ez a kettő nagyon hasonló.
+
